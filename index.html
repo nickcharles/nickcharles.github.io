@@ -6,17 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Nicholas Charles Morgan</title>
 
+    <link href="css/custom.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
   </head>
   <body>
-    <div class="col-xs-4">
-      <h1>Hello, world!</h1>
+    <div class="container">
+      <div class="page-header">
+          <h1>Nick C Morgan <small>Student. Engineer. All around good guy.</small></h1>
+      </div>
+      <div id="navigation" class="col-xs-3">
+        <ul class="nav">
+          <li>
+            <a href="#about" data-toggle="tab">About</a>
+          </li>
+          <li>
+            <a href="#employment" data-toggle="tab">Employment</a>
+          </li>
+          <li>
+            <a href="#projects" data-toggle="tab">Projects</a>
+          </li>
+          <li>
+            <a href="#contact" data-toggle="tab">Contact</a>
+          </li>
+          <li>
+            <a href="resources/resume.pdf">Resume</a>
+          </li>
+        </ul>
+      </div>
+      <div id="content" class="tab-content col-xs-9">
+        <div class="tab-pane active" id="about">  
+          <h2>About</h2>
+          <hr>
+          <p>My name is Nick, I'm a junior at the University of Michigan studying computer science through the College of Engineering. Besides computers, I'm interested in linguistics and foreign language and am pursuing a minor in Spanish.</p>
+
+          <p>I live in Ann Arbor, MI and am currently working as a software engineering intern for Quicken Loans. Previously I worked as an intern for Yottabyte out of Bloomfield Hills, and also do development of my own.
+
+          <p>Outside of school I am involved with the MHacks sponsorship team and am also a captain of the University of Michigan Ski Team. I've been snowboarding for 10 years and am looking to get back into skiing. I love music, particularly classic rock and black metal.</p>
+        </div>
+        <div class="tab-pane" id="employment">
+          <h2>Employment</h2>
+          <hr>
+          <h3>Quicken Loans <small>Software Engineering Intern</small></h3>
+          <h4><small>Detroit, MI</small></h4>
+          <p>Front and back end web developer for One Reverse Mortgage. Developed an interface that allows non-technical and dyanmic creation of landing pages for the website.
+          Also created a PHP middle layer for prototype website to allow user communication with mortgage calculator API, and built a simple website to test the mortgage refinance
+          calculator</p>
+          <h3>Yottabyte <small>Quality Assurance Intern</small></h3>
+          <p>Tested storage system web UI and helped diagnose problems arising from every day functionality. Performed alpha testing on large scale virtualization and cloud computing platform.</p>
+          <h4><small>Bloomfield Hills, MI</small></h4>
+          <h3>Blizzard Ski and Snowboard School <small>Snowboard Instructor</small></h3>
+          <h4>Mt. Holly and Pine Knob</h4>
+          <p>Taught students from 8-18 years of age the fundamental skills and advanced techniques of alpine and freestyle snowboarding. Level 1 AASI certified instructor.</p>
+        </div>
+        <div class="tab-pane" id="projects">
+          <h2>Projects</h2>
+          <hr>
+          <h3>Cocktail</h3>
+          <p>Cocktail is a mobile application that suggests drinks based on what the user has lying around at home. The user selects alcoholic and non-alcoholic ingredients and shakes the device. Cocktail will display a drink with proper proportions, only choosing drinks for which the user has the ingredients. If the user cannot complete a drink, it will suggest drinks that can be created with the fewest additional ingredients.</p>
+          <h3>xkcd - Chrome New Tab Page</h3>
+          <p>A Chrome plugin that changes the default new tab page to display the most recent xkcd web comic. It comes with a browser that lets you cycle through any of the comics, and also displays the most recent What-If and the user's bookmarks. 
+          <h3>DatFacts</h3>
+          <p>A PHP-based web application that sends random facts about a given subject to a mobile phone via SMS. DatFacts stands on an Amazon Web Services web server and scrapes Wikipedia for facts about a user determined subject. It then sends five of these facts using Twilio to the user's phone.
+        </div>
+        <div class="tab-pane" id="contact">
+          <h2>Contact</h2>
+          <hr>
+          <p><a href="https://github.com/nickcharles">GitHub</a></p>
+          <p><a href="https://twitter.com/nickcmorgan">Twitter</a></p>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-8">
-      <h1>My name is Nick Morgan!</h1>
-    </div>
+    <footer id="credits">
+      <div class="container">
+        <hr>
+        <p>Nick Morgan 2014</p>
+      </div>
+    </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
