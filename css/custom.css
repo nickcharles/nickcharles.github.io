@@ -1,5 +1,8 @@
-#credits {
-    position: absolute;
+.portrait {
+    max-width: 100px;
+}
+.credits {
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
