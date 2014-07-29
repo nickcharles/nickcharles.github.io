@@ -18,3 +18,7 @@ small:hover {
 #navigation {
     font-weight: bold;
 }
+.link {
+    font-weight: bold;
+    text-decoration: underline;
+}
