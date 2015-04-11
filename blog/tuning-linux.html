@@ -50,12 +50,14 @@
         Hopefully we're comfortable with the terminal. First thing's first, open that sucker up and do a system update. Let this finish and you'll be up to date with the official repos.
         <p>
 
-        <p><code>
+        <p>
         <ul class="list-unstyled">
+        <code>
           <li>sudo apt-get update</li>
           <li>sudo apt-get dist-upgrade</li>
+        </code>
         </ul>
-        </code></p>
+        </p>
 
         <p>
         This is a good time to make a backup. We want to do this just in case we break anything in the system and end up in a nasty state. The idea is that we'll be able to simply revert to the system state that we are currently in. We're going to do this using rsync to essentially copy everything from the system into a backup folder. We'll exclude a couple directories that we don't want to copy every time were going to backup, such as you're '/home' directory. Run this command to create your backup. Make sure you change the target directory to reflect where you want to actually place your backup, and also make sure you change my username to your own!
