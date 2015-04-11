@@ -32,12 +32,16 @@
         So let's talk about installing Linux. One of the most exciting (read: frustrating) parts about Linux installations on laptops is hardware diversity. Because you're not using a Macbook, you very likely don't have the same hardware as the guy sitting next to you, so the Linux operating system may behave differently on your hardware compared to his. Because of that, I'm stating now that this article has been written with only the Samsung Series 7 in mind. While I can't make any promises, the majority of this should work for any average laptop running Mint or any other Ubuntu derivative. Just in case you're wondering, here are the more important specs on this laptop:
         </p>
 
+        <p>
         Samsung Series 7 700Z5B-W01UB
-         - Intel i7-2675QM 2.2 GHz
-         - ATI Radeon HD 6490M / Intel HD Integrated Graphics
-         - Hitachi HTS547575A9E384
-         - Intel Centrino Wireless-N 6150
-         - ELANTech Clickpad
+        <ul>
+          <li>Intel i7-2675QM 2.2 GHz</li>
+          <li>TI Radeon HD 6490M / Intel HD Integrated Graphics</li>
+          <li>Hitachi HTS547575A9E384</li>
+          <li>Intel Centrino Wireless-N 6150</li>
+          <li>ELANTech Clickpad</li>
+         </ul>
+         </p>
 
         <p>
         So let's get started. First step is to make a LiveUSB with Mint on it, so go ahead and do that first. Plug in that USB (preferably 2.0, the black ones, 3.0 are blue) and reboot the system. Hopefully the computer will boot into the LiveUSB Linux environment. If not you'll have to go into your BIOS and change the boot device priority and place USB at the top of the list. I myself had to actually disable all of the other devices AND enable UEFI booting (which makes no sense) before I could force the laptop to boot to the USB through the boot menu. Anyway, once in the live environment click the installation icon and choose the custom partition option. I use a three partition scheme for my installations, the first being a 20GB partition for the root directory '/'. I also make a swap partition with the same amount of space as I have RAM, so 6GB. The final partition is the '/home' partition which will account for the rest of the available disk space. Once you've made your choices go ahead and finish the easy parts (username, password, hostname) and start the installation. Once it's done restart and boot up you're newly installed Linux environment.
@@ -47,26 +51,26 @@
         Hopefully we're comfortable with the terminal. First thing's first, open that sucker up and do a system update. Let this finish and you'll be up to date with the official repos.
         <p>
 
-        <code>
+        <p><code>
         sudo apt-get update
         sudo apt-get dist-upgrade
-        </code>
+        </code></p>
 
         <p>
         This is a good time to make a backup. We want to do this just in case we break anything in the system and end up in a nasty state. The idea is that we'll be able to simply revert to the system state that we are currently in. We're going to do this using rsync to essentially copy everything from the system into a backup folder. We'll exclude a couple directories that we don't want to copy every time were going to backup, such as you're '/home' directory. Run this command to create your backup. Make sure you change the target directory to reflect where you want to actually place your backup, and also make sure you change my username to your own!
         </p>
 
-        <code>
+        <p><code>
         rsync -aAXvH --progress --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home"} /* /home/nick/Documents/Backup/
-        </code>
+        </code></p>
 
         <p>
         Now that you have a backup, if anything breaks you can simply mosey your way into a new terminal and run this command.
         </p>
 
-        <code>
+        <p><code>
         rsync -aAXvH --progress /home/nick/Documents/Backup /
-        </code>
+        </code></p>
 
         <h3>ATI/Intel Hybrid Graphics</h3>
 
@@ -74,44 +78,44 @@
         On to the dirty stuff. We're going to start with graphics because in my opinion it is the one that is most likely to get you into trouble. Let's first recall that I am working with an ATI/Intel hybrid graphics configuration, and this information will only work with that configuration! What we're going to do is install the fglrx open source graphics driver and use that to power our display system. There may be a few unnecessary reboots in the following steps, however better safe than sorry! First, install the driver.
         </p>
 
-        <code>
+        <p><code>
         sudo apt-get install fglrx
         sudo reboot
-        </code>
+        </code></p>
 
         <p>
         Now we'll install the fglrx-pxpress package that allows switching between the two devices.
         </p>
 
-        <code>
+        <p><code>
         sudo apt-get install fglrx-pxpress
         sudo reboot
-        </code>
+        </code></p>
 
         <p>
         Now we install the AMD Catalyst Control Center, which will allow us to configure our graphics options.
         </p>
 
-        <code>
+        <p><code>
         sudo apt-get install fglrx-amdcccle
         sudo reboot
-        </code>
+        </code></p>
 
         <p>
         Things should be up and running now! Start the control center with this command.
         </p>
 
-        <code>
+        <p><code>
         gksudo amdcccle
-        </code>
+        </code></p>
 
         <p>
         You should be given an interface that allows you configure various graphics settings, but the one we're most interested in is the Switchable Graphics tab. You can switch between the two cards, however remember that you will need to reboot whenever you switch cards! Also, make sure you open the control center with gksudo, otherwise the changes may not take effect. You can also check to see which card is currently active by running the following command.
         </p>
 
-        <code>
+        <p><code>
         sudo fglrxinfo
-        </code>
+        </code></p>
 
         <h3>Battery Optimizations</h3>
 
@@ -119,18 +123,18 @@
         A huge problem with Linux laptops is battery life. While I'm still toying with mine, here are some of the biggest improvements I have made so far. First is definitely switchable graphics, its a MASSIVE improvement to use the integrated card over the discrete one. The next comes from a package called laptop-mode-tools, which allows a few kernel features to be tuned for laptop use. We also can use PowerTop to monitor our power consumption.
         </p>
 
-        <code>
+        <p><code>
         sudo apt-get install powertop
         sudo apt-get install laptop-mode-tools
-        </code>
+        </code></p>
 
         <p>
-        Thankfully, there is very little configuration that has to be done out of the box for either of these tools. PowerTop doesn't need any, however it may be helpful to run it once in calibration mode just to ensure our readings are accurate.
+        There is very little configuration that has to be done out of the box for either of these tools. PowerTop doesn't need any, however it may be helpful to run it once in calibration mode just to ensure our readings are accurate.
         </p>
 
-        <code>
+        <p><code>
         sudo powertop --calibrate
-        </code>
+        </code></p>
 
         <p>
         Laptop-mode-tools can be configured through its main configuration file in '/etc/laptop-mode/laptop-mode.conf'. There are also several configuration files for individual modules contained in the '/etc/laptop-mode/conf.d' directory. I'm not going to cover any of these here as they are very machine and user specific.
