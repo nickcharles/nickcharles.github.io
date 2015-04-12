@@ -31,7 +31,6 @@
 
       <div id="content" class="col-xs-12 col-md-8 col-md-offset-2">
         <h2>Tuning Linux</h2>
-
         <p>
         So I suppose I'll start my first blog post at 4:15 am on a Friday morning. As a bit of background, I'm awake because I tried to mess around with the Intel/AMD graphics drivers on my Linux Mint 17 installation and ended up killing the X server, so here I am on a fresh installation. Linux installation can be a little daunting for first timers and, in my own experience, always has a few quirks that can trip up just about anybody. What I want to do with this post is create a rather comprehensive guide to installing and tuning Linux (Linux Mint 17.1 to be precise) on a laptop. I'm going to try and cover the basics of installation as well as touch on some of the problems that seem to affect laptop Linux users.
         </p>
@@ -52,7 +51,7 @@
         </p>
 
         <p>
-        So let's get started. First step is to make a LiveUSB with Mint on it, so go ahead and do that first. Plug in that USB (preferably 2.0, the black ones, 3.0 are blue) and reboot the system. Hopefully the computer will boot into the LiveUSB Linux environment. If not you'll have to go into your BIOS and change the boot device priority and place USB at the top of the list. I myself had to actually disable all of the other devices AND enable UEFI booting (which makes no sense) before I could force the laptop to boot to the USB through the boot menu. Anyway, once in the live environment click the installation icon and choose the custom partition option. I use a three partition scheme for my installations, the first being a 20GB partition for the root directory '/'. I also make a swap partition with the same amount of space as I have RAM, so 6GB. The final partition is the '/home' partition which will account for the rest of the available disk space. Once you've made your choices go ahead and finish the easy parts (username, password, hostname) and start the installation. Once it's done restart and boot up you're newly installed Linux environment.
+        So let's get started. First step is to make a LiveUSB with Mint on it, so go ahead and do that first. Plug in that USB (preferably 2.0, the black ones, 3.0 are blue) and reboot the system. Hopefully the computer will boot into the LiveUSB Linux environment. If not you'll have to go into your BIOS and change the boot device priority and place USB at the top of the list. I myself had to actually disable all of the other devices AND enable UEFI booting (which makes no sense) before I could force the laptop to boot to the USB through the boot menu. Anyway, once in the live environment click the installation icon and choose the custom partition option. I use a three partition scheme for my installations, the first being a 20GB partition for the root directory <code>/</code>. I also make a swap partition with the same amount of space as I have RAM, so 6GB. The final partition is the <code>/home</code> partition which will account for the rest of the available disk space. Once you've made your choices go ahead and finish the easy parts (username, password, hostname) and start the installation. Once it's done restart and boot up you're newly installed Linux environment.
         </p>
 
         <p>
@@ -67,7 +66,7 @@
         </p>
 
         <p>
-        This is a good time to make a backup. We want to do this just in case we break anything in the system and end up in a nasty state. The idea is that we'll be able to simply revert to the system state that we are currently in. We're going to do this using rsync to essentially copy everything from the system into a backup folder. We'll exclude a couple directories that we don't want to copy every time were going to backup, such as you're '/home' directory. Run this command to create your backup. Make sure you change the target directory to reflect where you want to actually place your backup, and also make sure you change my username to your own!
+        This is a good time to make a backup. We want to do this just in case we break anything in the system and end up in a nasty state. The idea is that we'll be able to simply revert to the system state that we are currently in. We're going to do this using rsync to essentially copy everything from the system into a backup folder. We'll exclude a couple directories that we don't want to copy every time were going to backup, such as your <code>/home</code> directory. Run this command to create your backup. Make sure you change the target directory to reflect where you want to actually place your backup, and also make sure you change my username to your own!
         </p>
 
         <p>
@@ -87,7 +86,6 @@
         </p>
 
         <h3>ATI/Intel Hybrid Graphics</h3>
-
         <p>
         On to the dirty stuff. We're going to start with graphics because in my opinion it is the one that is most likely to get you into trouble. Let's first recall that I am working with an ATI/Intel hybrid graphics configuration, and this information will only work with that configuration! What we're going to do is install the fglrx open source graphics driver and use that to power our display system. There may be a few unnecessary reboots in the following steps, however better safe than sorry! First, install the driver.
         </p>
@@ -142,9 +140,8 @@
         </p>
 
         <h3>Battery Optimizations</h3>
-
         <p>
-        A huge problem with Linux laptops is battery life. While I'm still toying with mine, here are some of the biggest improvements I have made so far. First is definitely switchable graphics, its a MASSIVE improvement to use the integrated card over the discrete one. The next comes from a package called laptop-mode-tools, which allows a few kernel features to be tuned for laptop use. We also can use PowerTop to monitor our power consumption.
+        A huge problem with Linux on laptops is battery life. While I'm still toying with my own settings, here are some of the biggest improvements I have made so far. First is definitely switchable graphics, it's a MASSIVE improvement to use the integrated card over the discrete one. The next comes from a package called laptop-mode-tools, which allows a few kernel features to be tuned for laptop use. We also can use PowerTop to monitor our power consumption.
         </p>
 
         <p>
@@ -165,8 +162,31 @@
         </p>
 
         <p>
-        Laptop-mode-tools can be configured through its main configuration file in '/etc/laptop-mode/laptop-mode.conf'. There are also several configuration files for individual modules contained in the '/etc/laptop-mode/conf.d' directory. I'm not going to cover any of these here as they are very machine and user specific.
+        Laptop-mode-tools can be configured through its main configuration file in <code>/etc/laptop-mode/laptop-mode.conf</code>. There are also several configuration files for individual modules contained in the <code>/etc/laptop-mode/conf.d</code> directory. I'm not going to cover any of these here as they are very machine and user specific.
         </p>
+
+        <h3>Intel Centrino Wireless-N 6150</h3>
+        <p>
+        The 6150 is a solid wireless card. It's up and running on Mint right out of the box, so there isn't much to configure here. I haven't yet figured out if there is a way to force a bit more performance out of the card, but if anybody has any ideas I'd love to hear them! Not much else to be said here.
+        </p>
+
+        <h3>ELANTech Clickpad</h3>
+        <p>
+        The touchpad on this laptop is actually pretty nice. It's big and it's a clickpad, similar to the one offered by Apple on their Macbooks. Its default functionality is alright, though there are quite a few options that can be toggled to beef it up a bit. All of the touch data that's captured by the operating system is handled by a piece of software called Synaptics. It is exposed to the user through an interface called Synclient, which also allows us to do some tweaking. Typing <code>synclient</code> into a terminal will list all of the configurable settings and their values. To get more information on any of these values, check out their corresponding entries in <code>man synaptics</code>. To set a value, simply run the command <code>synclient MouseSetting=value</code>. Note that these settings will not be saved on reboot, more on that later.
+        </p>
+
+        </p>
+        The list of features is huge so I won't cover all of them, however here are a few of the notable settings. <code>TapButtonX</code> and <code>ClickButtonX</code> allow you to choose which button is reported on these events. <code>PalmDetect</code> and the related settings allow you to tune palm detection when typing. <code>XButtonAreaY</code> is a collection of settings that choose where buttons are in that case that you use different locations of the clickpad as different mouse buttons. <code>XTwoFingerScroll</code> is a pair of settings that allow you to enable/disable two finger scrolling, and <code>XScrollDelta</code> calibrates how quickly you scroll. There are tons of other options so I encourage you to spend a bit of time reading about each of them and tuning it the way you like. I will say that I have found it easier to ignore the sensitivity settings provided by Synaptics, and simply use the Mint mouse settings menu to adjust instead. This gave me much smoother mouse sensitivity and acceleration, and wasn't nearly as frustrating as dealing with Synaptics.
+        </p>
+
+        <p>
+        As I said before, none of these settings will be saved on reboot. Therefore, you'll need to write a configuration file and place it in <code>/etc/X11/xorg.conf.d/</code>. There should be a sample file called <code>50-synaptics.conf</code> sitting in the directory <code>/usr/share/X11/xorg.conf.d/</code>. Simply copy this file into the previously mentioned directory, and edit it as you see fit. I have provided a <a href="../resources/50-synaptics.conf">sample file</a>, the one I'm currently using on my machine, as an example. Remember, only the file in <code>/etc/X11/xorg.conf.d/</code> will be read by the system, the other simply serves as an example.
+        </p>
+
+        <p>
+        So that about wraps this up for now. If you have any questions or comments my email is on my resume, please don't hesitate to reach out!
+        </p>
+
         <h4>04/11/2015</h4>
       </div>
     </div>
