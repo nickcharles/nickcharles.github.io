@@ -5,12 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" href="resources/favicon.ico">
+    <link rel="shortcut icon" href="resources/favicon-1.ico">
     <title>Nick C Morgan</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <!-- Octicons -->
     <link href="fonts/octicons/octicons.css" rel="stylesheet">
     <!-- Custom -->
@@ -20,7 +19,9 @@
   <body>
     <div class="container">
       <div id="header" class="page-header row text-center">
-        <p class="col-xs-12 col-md-offset-1 col-md-2"><img src="resources/portrait.png" class="portrait img-rounded"></p>
+        <div class="col-xs-12 col-md-offset-1 col-md-2">
+          <img src="resources/portrait.png" class="portrait img-rounded">
+        </div>
         <h1 class="col-xs-12 col-md-3">
           Nick C Morgan
         </h1>
@@ -30,18 +31,20 @@
       </div>
 
       <div id="navigation" class="col-xs-3">
-        <ul class="nav">
-          <li><a href="#about" data-toggle="tab">About</a></li>
-          <li><a href="#work" data-toggle="tab">Work</a></li>
-          <li><a href="#projects" data-toggle="tab">Projects</a></li>
-          <li><a href="#contact" data-toggle="tab">Contact</a></li>
-          <li><a href="resources/resume.pdf" target="_blank">Resume</a></li>
-          <li><a href="#blog" data-toggle="tab">Blog</a></li>
-        </ul>
+        <nav>
+          <ul class="nav">
+            <li><a class="navLink" href="#about">About</a></li>
+            <li><a class="navLink" href="#work">Work</a></li>
+            <li><a class="navLink" href="#projects">Projects</a></li>
+            <li><a class="navLink" href="#contact">Contact</a></li>
+            <li><a href="resources/resume.pdf" target="_blank">Resume</a></li>
+            <li><a class="navLink" href="#blog">Blog</a></li>
+          </ul>
+        </nav>
       </div>
 
       <div id="content" class="tab-content col-xs-9">
-        <div class="tab-pane fade in active" id="about">
+        <div class="pane" id="about">
           <h2>About</h2>
             <p>
             My name is Nick, I'm a rising senior at the University of Michigan studying 
@@ -62,7 +65,7 @@
             </p>
         </div>
 
-        <div class="tab-pane fade" id="work">
+        <div class="pane" id="work">
           <h2>Work</h2>
             <h3>Palantir <small>Forward Deployed Engineering Intern</small></h3>
               <h4><small>Palo Alto, CA</small></h4>
@@ -95,15 +98,15 @@
               </p>
         </div>
 
-        <div class="tab-pane fade" id="projects">
+        <div class="pane" id="projects">
           <h2>Projects</h2>
-            <a href="https://github.com/nickcharles/Spool"><h3>Spool</h3></a>
+            <h3><a href="https://github.com/nickcharles/Spool">Spool</a></h3>
               <p>
               Spool is a modular string formatting and manipulation library for C++, 
               built to match the more robust string features provided by 
               languages like Java and Python.
               </p>
-          	<a href="http://nickcmorgan.com/bluebird/"><h3>Bluebird</h3></a>
+          	<h3><a href="http://nickcmorgan.com/bluebird/">Bluebird</a></h3>
               <p>
               Bluebird is a web application that analyzes a Twitter user's 
               friends and followers. It compares the friends and followers and 
@@ -121,7 +124,7 @@
               which the user has the ingredients. If the user cannot complete 
               a drink, it will suggest drinks that can be created with 
               the fewest additional ingredients.</p>
-            <a href="https://chrome.google.com/webstore/detail/xkcd-new-tab-page/cjakkpghoepnjecfepbmmfofbbjijmgh?hl=en-US"><h3>xkcd - Chrome New Tab Page</h3></a>
+            <h3><a href="https://chrome.google.com/webstore/detail/xkcd-new-tab-page/cjakkpghoepnjecfepbmmfofbbjijmgh?hl=en-US">xkcd - Chrome New Tab Page</a></h3>
               <p>
               A Chrome plugin that changes the default new tab page to 
               display the most recent xkcd web comic. It comes with a browser that 
@@ -137,14 +140,14 @@
               </p>
         </div>
 
-        <div class="tab-pane fade" id="contact">
+        <div class="pane" id="contact">
           <h2>Contact</h2>
             <p><span class="octicon octicon-mark-github"></span><a href="https://github.com/nickcharles">GitHub</a></p>
             <p><span class="octicon octicon-flame"></span><a href="https://twitter.com/nickcmorgan">Twitter</a></p>
             <p><span class="octicon octicon-organization"></span><a href="https://www.linkedin.com/in/nickcmorgan">LinkedIn</a></p>
         </div>
 
-        <div class="tab-pane fade" id="blog">
+        <div class="pane" id="blog">
           <h2>Blog</h2>
             <p><a href="blog/tuning-linux.html">4/11/2015 - Tuning Linux</a></p>
         </div>
@@ -152,11 +155,12 @@
       </div>
     </div>
 
+    <!-- jQuery and Bootstrap -->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Custom -->
+    <script src="js/custom.js"></script>
     <!-- Google Analytics -->
     <script src="js/gAnalytics.js"></script>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
