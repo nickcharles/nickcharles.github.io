@@ -1,45 +1,50 @@
 ---
 layout: default
 title: index
-slug: nickcmorgan
 ---
 
 <div id="navigation" class="col-xs-3">
-  <ul class="nav">
-    <li><a href="#about" data-toggle="tab">About</a></li>
-    <li><a href="#work" data-toggle="tab">Work</a></li>
-    <li><a href="#projects" data-toggle="tab">Projects</a></li>
-    <li><a href="#contact" data-toggle="tab">Contact</a></li>
-    <li><a href="resources/resume.pdf" target="_blank">Resume</a></li>
-    <li><a href="#blog" data-toggle="tab">Blog</a></li>
-  </ul>
+  <nav>
+    <ul class="nav">
+      <li><a class="navLink" href="#about">About</a></li>
+      <li><a class="navLink" href="#work">Work</a></li>
+      <li><a class="navLink" href="#projects">Projects</a></li>
+      <li><a class="navLink" href="#contact">Contact</a></li>
+      <li><a href="resources/resume.pdf" target="_blank">Resume</a></li>
+      <li><a class="navLink" href="#blog">Blog</a></li>
+    </ul>
+  </nav>
 </div>
 
 <div id="content" class="tab-content col-xs-9">
-  <div class="tab-pane fade in active" id="about">
+  <div class="pane" id="about">
     <h2>About</h2>
-    {% include about.html %}
+      {% include about.html %}
   </div>
-  <div class="tab-pane fade" id="work">
+
+  <div class="pane" id="work">
     <h2>Work</h2>
-    {% include work.html %}
+      {% include work.html %}
   </div>
-  <div class="tab-pane fade" id="projects">
+
+  <div class="pane" id="projects">
     <h2>Projects</h2>
-    {% include projects.html %}
+      {% include projects.html %}
   </div>
-  <div class="tab-pane fade" id="contact">
+
+  <div class="pane" id="contact">
     <h2>Contact</h2>
-    {% include contact.html %}
+      {% include contact.html %}
   </div>
-  <div class="tab-pane fade" id="blog">
+
+  <div class="pane" id="blog">
     <h2>Blog</h2>
-    <ul>
-      {% for post in site.posts %}
-        <li>
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+      <ul>
+        {% for post in site.posts %}
+          <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
   </div>
 </div>
