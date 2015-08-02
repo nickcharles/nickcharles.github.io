@@ -4,21 +4,15 @@ a, a:hover {
 small:hover {
     color: #9C27B0;
 }
+nav {
+    font-weight: bold;
+}
 .portrait {
     max-width: 100px;
 }
-.credits {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+.pane {
+    display: none;
 }
 .octicon {
     margin: 5px;
-}
-#navigation {
-    font-weight: bold;
-}
-.link {
-    font-weight: bold;
-    text-decoration: underline;
 }

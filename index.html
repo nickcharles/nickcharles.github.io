@@ -1,162 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+---
+layout: default
+title: index
+---
 
-    <link rel="shortcut icon" href="resources/favicon.ico">
-    <title>Nick C Morgan</title>
+<div id="navigation" class="col-xs-3">
+  <nav>
+    <ul class="nav">
+      <li><a class="navLink" href="#about">About</a></li>
+      <li><a class="navLink" href="#work">Work</a></li>
+      <li><a class="navLink" href="#projects">Projects</a></li>
+      <li><a class="navLink" href="#contact">Contact</a></li>
+      <li><a href="resources/resume.pdf" target="_blank">Resume</a></li>
+      <li><a class="navLink" href="#blog">Blog</a></li>
+    </ul>
+  </nav>
+</div>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <!-- Octicons -->
-    <link href="fonts/octicons/octicons.css" rel="stylesheet">
-    <!-- Custom -->
-    <link href="css/custom.css" rel="stylesheet">
-  </head>
+<div id="content" class="tab-content col-xs-9">
+  <div class="pane" id="about">
+    <h2>About</h2>
+      {% include about.html %}
+  </div>
 
-  <body>
-    <div class="container">
-      <div id="header" class="page-header row text-center">
-        <p class="col-xs-12 col-md-offset-1 col-md-2"><img src="resources/portrait.png" class="portrait img-rounded"></p>
-        <h1 class="col-xs-12 col-md-3">
-          Nick C Morgan
-        </h1>
-        <h1 class="col-xs-12 col-md-5">
-          <small>Student. Engineer. All around good guy.</small>
-        </h1>
-      </div>
+  <div class="pane" id="work">
+    <h2>Work</h2>
+      {% include work.html %}
+  </div>
 
-      <div id="navigation" class="col-xs-3">
-        <ul class="nav">
-          <li><a href="#about" data-toggle="tab">About</a></li>
-          <li><a href="#work" data-toggle="tab">Work</a></li>
-          <li><a href="#projects" data-toggle="tab">Projects</a></li>
-          <li><a href="#contact" data-toggle="tab">Contact</a></li>
-          <li><a href="resources/resume.pdf" target="_blank">Resume</a></li>
-          <li><a href="#blog" data-toggle="tab">Blog</a></li>
-        </ul>
-      </div>
+  <div class="pane" id="projects">
+    <h2>Projects</h2>
+      {% include projects.html %}
+  </div>
 
-      <div id="content" class="tab-content col-xs-9">
-        <div class="tab-pane fade in active" id="about">
-          <h2>About</h2>
-            <p>
-            My name is Nick, I'm a rising senior at the University of Michigan studying 
-            computer science through the College of Engineering. Besides computers, 
-            I'm interested in linguistics and foreign language, and I'm pursuing a minor in Spanish.
-            </p>
-            <p>
-            I'm currently spending the summer working for Palantir Technologies 
-            in Palo Alto, CA as a forward deployed engineering intern. 
-            I have previously worked at Quicken Loans in Detroit and for 
-            Yottabyte in Bloomfield Hills, and also dabble in development on my own.
-            </p>
-            <p>
-            Outside of school I've been involved with the MHacks sponsorship team and 
-            am also a captain of the University of Michigan Ski Team. I've been 
-            snowboarding for 10 years and am looking to get in to skiing. 
-            I also love music, particularly classic rock and black metal.
-            </p>
-        </div>
+  <div class="pane" id="contact">
+    <h2>Contact</h2>
+      {% include contact.html %}
+  </div>
 
-        <div class="tab-pane fade" id="work">
-          <h2>Work</h2>
-            <h3>Palantir <small>Forward Deployed Engineering Intern</small></h3>
-              <h4><small>Palo Alto, CA</small></h4>
-              <p>
-              <a href="https://www.palantir.com/solutions/defense/">National Security.</a>
-              </p>
-            <h3>Quicken Loans <small>Software Engineering Intern</small></h3>
-              <h4><small>Detroit, MI</small></h4>
-              <p>
-              Front and back end web developer for One Reverse Mortgage. I developed 
-              an interface that allows non-technical and dynamic generation 
-              of landing pages for the company's website. I also created a PHP 
-              middle layer for a prototype website to allow user communication 
-              with a mortgage calculator API, and built a simple website to test 
-              a mortgage refinance calculator.
-              </p>
-            <h3>Yottabyte <small>Quality Engineering Intern</small></h3>
-              <h4><small>Bloomfield Hills, MI</small></h4>
-              <p>
-              I tested the storage system web UI and diagnosed problems 
-              arising in every day functionality. I also performed alpha testing 
-              on a large scale virtualization and cloud computing platform.
-              </p>
-            <h3>Blizzard Ski and Snowboard School <small>Snowboard Instructor</small></h3>
-              <h4><small>Mt. Holly and Pine Knob</small></h4>
-              <p>
-              I taught students from 8-18 years of age the fundamental skills 
-              and advanced techniques of alpine and freestyle snowboarding. 
-              Level 1 AASI certified instructor.
-              </p>
-        </div>
-
-        <div class="tab-pane fade" id="projects">
-          <h2>Projects</h2>
-            <a href="https://github.com/nickcharles/Spool"><h3>Spool</h3></a>
-              <p>
-              Spool is a modular string formatting and manipulation library for C++, 
-              built to match the more robust string features provided by 
-              languages like Java and Python.
-              </p>
-          	<a href="http://nickcmorgan.com/bluebird/"><h3>Bluebird</h3></a>
-              <p>
-              Bluebird is a web application that analyzes a Twitter user's 
-              friends and followers. It compares the friends and followers and 
-              finds those that are not mutual. It will display the people that 
-              the user does not follow back, as well as the people the user 
-              follows who do not follow the user back. This is an alternative 
-              to most web applications that require login authorization.
-              </p>
-            <h3>Cocktail</h3>
-              <p>
-              Cocktail is a mobile application that suggests drinks based on 
-              what the user has lying around at home. The user selects alcoholic 
-              and non-alcoholic ingredients and shakes the device. Cocktail will 
-              display a drink with proper proportions, only choosing drinks for 
-              which the user has the ingredients. If the user cannot complete 
-              a drink, it will suggest drinks that can be created with 
-              the fewest additional ingredients.</p>
-            <a href="https://chrome.google.com/webstore/detail/xkcd-new-tab-page/cjakkpghoepnjecfepbmmfofbbjijmgh?hl=en-US"><h3>xkcd - Chrome New Tab Page</h3></a>
-              <p>
-              A Chrome plugin that changes the default new tab page to 
-              display the most recent xkcd web comic. It comes with a browser that 
-              lets you cycle through any of the comics, and also displays the most 
-              recent What-If and the user's bookmarks.
-              </p>
-            <h3>DatFacts</h3>
-              <p>
-              A PHP-based web application that sends random facts about a given 
-              subject to a mobile phone via SMS. DatFacts stands on an Amazon Web 
-              Services web server and scrapes Wikipedia for facts about a user determined 
-              subject. It then sends five of these facts using Twilio to the user's phone.
-              </p>
-        </div>
-
-        <div class="tab-pane fade" id="contact">
-          <h2>Contact</h2>
-            <p><span class="octicon octicon-mark-github"></span><a href="https://github.com/nickcharles">GitHub</a></p>
-            <p><span class="octicon octicon-flame"></span><a href="https://twitter.com/nickcmorgan">Twitter</a></p>
-            <p><span class="octicon octicon-organization"></span><a href="https://www.linkedin.com/in/nickcmorgan">LinkedIn</a></p>
-        </div>
-
-        <div class="tab-pane fade" id="blog">
-          <h2>Blog</h2>
-            <p><a href="blog/tuning-linux.html">4/11/2015 - Tuning Linux</a></p>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Google Analytics -->
-    <script src="js/gAnalytics.js"></script>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  </body>
-</html>
+  <div class="pane" id="blog">
+    <h2>Blog</h2>
+      <ul>
+        {% for post in site.posts %}
+          <li>
+            <a href="{{ post.url }}">{{ post.title }} - {{ post.date | date: "%x" }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+  </div>
+</div>
