@@ -6,8 +6,6 @@ title: Stop Texting Me
 Stop Texting Me
 ---------------
 
-Stop texting me.
-
 Seriously. It’s not that I don’t like the communication, I really appreciate that you’re reaching out to me. I just don’t understand why we’re holding ourselves to this outdated technology.
 
 Character limits, a lack of support for “read” and “typing” detection, difficulty in sharing conversations between devices, generally dubious encryption and security, reliance on a separate protocol for any content other than raw text, and reliably dysfunctional group messages are all holding SMS way behind many of the services that are begging to be used instead.
