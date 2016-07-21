@@ -3,48 +3,26 @@ layout: default
 title: index
 ---
 
-<div id="navigation" class="col-xs-3">
-  <nav>
-    <ul class="nav">
-      <li><a class="navLink" href="#about">About</a></li>
-      <li><a class="navLink" href="#work">Work</a></li>
-      <li><a class="navLink" href="#projects">Projects</a></li>
-      <li><a class="navLink" href="#contact">Contact</a></li>
-      <li><a href="resources/resume.pdf" target="_blank">Resume</a></li>
-      <li><a class="navLink" href="#blog">Blog</a></li>
-    </ul>
-  </nav>
-</div>
+<p>My name is Nick. I just graduated from the University of Michigan studying computer science through the College of Engineering, and I now live in Palo Alto working for Palantir Technologies. Besides computers I'm interested in linguistics, foreign language, attention to detail, and black metal. At school I was involved with the MHacks sponsorship team from time to time and held a leadership role on the University of Michigan Ski and Snowboard Team. I've been snowboarding every season for most of my walking years, and I just bought a pair of skis.</p>
 
-<div id="content" class="tab-content col-xs-9">
-  <div class="pane" id="about">
-    <h2>About</h2>
-      {% include about.html %}
-  </div>
+<p>You may notice that this website is a bit bland. Recently I've been frustrated with the bloated sizes of popular websites and figured that I couldn't complain about them if my own website was unnecessarily large as well. Inspired by sites like <a href="http://motherfuckingwebsite.com/">this</a>, I've gone slightly extreme and have slimmed my website down to around 5.2 kilobytes. I'm not saying every website should look like this, I'm just saying it was really frustrating to be sitting in Europe with a 2G connection trying to load 200MB web pages. Here's to hoping for a more data-concious internet.</p>
 
-  <div class="pane" id="work">
-    <h2>Work</h2>
-      {% include work.html %}
-  </div>
+<h2>Work</h2>
+  {% include work.html %}
 
-  <div class="pane" id="projects">
-    <h2>Projects</h2>
-      {% include projects.html %}
-  </div>
+<h2>Projects</h2>
+  {% include projects.html %}
 
-  <div class="pane" id="contact">
-    <h2>Contact</h2>
-      {% include contact.html %}
-  </div>
+<h2>Blog</h2>
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }} - {{ post.date | date: "%x" }}</a>
+    </li>
+  {% endfor %}
+</ul>
 
-  <div class="pane" id="blog">
-    <h2>Blog</h2>
-      <ul>
-        {% for post in site.posts %}
-          <li>
-            <a href="{{ post.url }}">{{ post.title }} - {{ post.date | date: "%x" }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-  </div>
-</div>
+<hr>
+
+<h2>Contact</h2>
+  {% include contact.html %}

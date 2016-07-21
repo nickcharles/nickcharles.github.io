@@ -21,50 +21,70 @@ First step is to make a LiveUSB with Mint on it, so go ahead and do that first. 
 
 Hopefully you're comfortable with the terminal. First thing's first, open that sucker up and do a system update. Let this finish and you'll be up to date with the official repos.
 
-    sudo apt-get update
-    sudo apt-get dist-upgrade
+```
+sudo apt-get update
+sudo apt-get dist-upgrade
+```
 
 This is a good time to make a backup. We want to do this just in case we break anything in the system and end up in a nasty state. The idea is that we'll be able to simply revert to the system state that we are currently in. We're going to do this using rsync to essentially copy everything from the system into a backup folder. We'll exclude a couple directories that we don't want to copy every time were going to backup, such as your `/home` directory. Run this command to create your backup. Make sure you change the target directory to reflect where you want to actually place your backup, and also make sure you change my username to your own!
 
-    rsync -aAXvH --progress --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home"} /* /home/nick/Documents/Backup/
+```
+rsync -aAXvH --progress --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/media/*","/lost+found","/home"} /* /home/nick/Documents/Backup/
+```
 
 Now that you have a backup, if anything breaks you can simply mosey your way into a new terminal and run this command.
 
-    rsync -aAXvH --progress /home/nick/Documents/Backup /
+```
+rsync -aAXvH --progress /home/nick/Documents/Backup /
+```
 
 ### ATI/Intel Hybrid Graphics
 On to the dirty stuff. We're going to start with graphics because in my opinion it is the one that is most likely to get you into trouble. Let's first recall that I am working with an ATI/Intel hybrid graphics configuration, and this information will only work with that configuration! What we're going to do is install the fglrx open source graphics driver and use that to power our display system. There may be a few unnecessary reboots in the following steps, however better safe than sorry! First, install the driver.
 
-    sudo apt-get install fglrx
-    sudo reboot
+```
+sudo apt-get install fglrx
+sudo reboot
+```
 
 Now we'll install the fglrx-pxpress package that allows switching between the two devices.
 
-    sudo apt-get install fglrx-pxpress
-    sudo reboot
+```
+sudo apt-get install fglrx-pxpress
+sudo reboot
+```
 
 Now we install the AMD Catalyst Control Center, which will allow us to configure our graphics options.
 
-    sudo apt-get install fglrx-amdcccle
-    sudo reboot
+```
+sudo apt-get install fglrx-amdcccle
+sudo reboot
+```
 
 Things should be up and running now! Start the control center with this command.
 
-    gksudo amdcccle
+```
+gksudo amdcccle
+```
 
 You should be given an interface that allows you configure various graphics settings, but the one we're most interested in is the Switchable Graphics tab. You can switch between the two cards, however remember that you will need to reboot whenever you switch cards! Also, make sure you open the control center with gksudo, otherwise the changes may not take effect. You can also check to see which card is currently active by running the following command.
 
-    sudo fglrxinfo
+```
+sudo fglrxinfo
+```
 
 ### Battery Optimizations
 A huge problem with Linux on laptops is battery life. While I'm still toying with my own settings, here are some of the biggest improvements I have made so far. First is definitely switchable graphics, it's a MASSIVE improvement to use the integrated card over the discrete one. The next comes from a package called laptop-mode-tools, which allows a few kernel features to be tuned for laptop use. We also can use PowerTop to monitor our power consumption.
 
-    sudo apt-get install powertop
-    sudo apt-get install laptop-mode-tools
+```
+sudo apt-get install powertop
+sudo apt-get install laptop-mode-tools
+```
 
 There is very little configuration that has to be done out of the box for either of these tools. PowerTop doesn't need any, however it may be helpful to run it once in calibration mode just to ensure our readings are accurate.
 
-    sudo powertop --calibrate
+```
+sudo powertop --calibrate
+```
 
 Laptop-mode-tools can be configured through its main configuration file at `/etc/laptop-mode/laptop-mode.conf`. There are also several configuration files for individual modules contained in the `/etc/laptop-mode/conf.d/` directory. I'm not going to cover any of these here as they are very machine and user specific.
 
