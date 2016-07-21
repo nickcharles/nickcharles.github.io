@@ -39,24 +39,10 @@ rsync -aAXvH --progress /home/nick/Documents/Backup /
 ```
 
 ### ATI/Intel Hybrid Graphics
-On to the dirty stuff. We're going to start with graphics because in my opinion it is the one that is most likely to get you into trouble. Let's first recall that I am working with an ATI/Intel hybrid graphics configuration, and this information will only work with that configuration! What we're going to do is install the fglrx open source graphics driver and use that to power our display system. There may be a few unnecessary reboots in the following steps, however better safe than sorry! First, install the driver.
+On to the dirty stuff. We're going to start with graphics because in my opinion it is the one that is most likely to get you into trouble. Let's first recall that I am working with an ATI/Intel hybrid graphics configuration, and this information will only work with that configuration! What we're going to do is install the fglrx open source graphics driver and use that to power our display system. Install the driver with this command. The fglrx-pxpress package allows switching between the two devices and the third package is the AMD Catalyst Control Center which allows you to configure your graphics settings. Reboot the computer after the installation.
 
 ```
-sudo apt-get install fglrx
-sudo reboot
-```
-
-Now we'll install the fglrx-pxpress package that allows switching between the two devices.
-
-```
-sudo apt-get install fglrx-pxpress
-sudo reboot
-```
-
-Now we install the AMD Catalyst Control Center, which will allow us to configure our graphics options.
-
-```
-sudo apt-get install fglrx-amdcccle
+sudo apt-get install fglrx fglrx-pxpress fglrx-amdcccle
 sudo reboot
 ```
 
@@ -104,8 +90,6 @@ So that about wraps this up for now. If you have any questions or comments my em
 ### Update 7/8/2015 - Display
 
 I wanted to add a bit of information regarding the display. While the screen is pretty nice, the colors are a bit washed out and the viewing angle isn't great. I found a pretty nice custom profile that gives the screen a bit more contrast, now available [here]({{ site.url }}/resources/samsung-series-7-ICC-profile.zip "Samsung Series 7 Custom ICC Profile"). I also recommend high contrast color schemes for text editors and terminal windows. The [Solarized](http://ethanschoonover.com/solarized) profile is pretty well-liked, but in my experience it just doesn't work well on this screen. I've found both [Tango](http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines) and [Monokai](https://terminal.sexy/#Jygi-PjyJygi-SZypuIu9L91ZtnvroH_oe_k-PjydXFe-SZypuIu9L91ZtnvroH_oe_k-fj1) to be good choices.
-
-#### 4/11/2015
 
 ##### Attachments
 *   [Example synaptics.conf]({{ site.url }}/resources/50-synaptics.conf)
