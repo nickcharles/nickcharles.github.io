@@ -154,7 +154,7 @@ Subject, Start Date, Start Time, End Time, All Day Event, Location, Description
 
 Let's write some Python!
 
-```
+```python
 import re
 
 f = open('times.txt', 'r')
