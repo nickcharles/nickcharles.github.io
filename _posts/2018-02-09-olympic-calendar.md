@@ -10,7 +10,7 @@ I was unable to find a nice way to visualize all of the scheduling information f
 
 The lesson here is that the fastest way to do things is certainly not always the best way.
 
-First copy all of the source from https://www.pyeongchang2018.com/en/schedule. We only need everything contained in the body, so go ahead and copy just that section. The first five elements are useless so let's just cut those out now. Also get the closing body tag on the last line. All that's left are a bunch of divs that have event information in them. We'll call this file original-olympics.txt.
+First copy all of the source from [here](https://www.pyeongchang2018.com/en/schedule). We only need everything contained in the body, so go ahead and copy just that section. The first five elements are useless so let's just cut those out now. Also get the closing body tag on the last line. All that's left are a bunch of divs that have event information in them. We'll call this file original-olympics.txt.
 
 Now, some text processing. First remove empty lines:
 
@@ -201,4 +201,4 @@ f.close()
 out.close()
 ```
 
-Certainly nothing to be proud of, but it gets the job done! This gives me a nice CSV that I can import in Google Calendar. The end result is here http://nickcmorgan.com/olympic-calendar and I think it may be the most useful version of the Olympic calendar that currently exists on the internet.
+Certainly nothing to be proud of, but it gets the job done! This gives me a nice CSV that I can import in Google Calendar. The end result is [here](http://nickcmorgan.com/olympic-calendar) and I think it may be the most useful version of the Olympic calendar that currently exists on the internet.
