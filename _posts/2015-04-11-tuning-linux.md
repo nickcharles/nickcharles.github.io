@@ -3,9 +3,6 @@ layout: post
 title: Tuning Linux
 ---
 
-Tuning Linux
-------------
-
 So I suppose I'll start my first blog post at 4:15 am on a Friday morning. As a bit of background, I'm awake because I tried to mess around with the Intel/AMD graphics drivers on my Linux Mint 17 installation and ended up killing the X server, so here I am on a fresh installation. Linux installation can be a little daunting for first timers and, in my own experience, always has a few quirks that can trip up just about anybody. What I want to do with this post is create a rather comprehensive guide to installing and tuning Linux (Linux Mint 17.1 to be precise) on a laptop. I'm going to try and cover the basics of installation as well as touch on some of the problems that seem to affect laptop Linux users.
 
 One of the most exciting (read: frustrating) parts about Linux installations on laptops is hardware diversity. Because you're not using a Macbook, you very likely don't have the same hardware as the guy sitting next to you, so the Linux operating system may behave differently on your hardware compared to his. Because of that, I'm stating now that this article has been written with only the Samsung Series 7 in mind. While I can't make any promises, the majority of this should work for any average laptop running Mint or any other Ubuntu derivative. Just in case you're wondering, here are the more important specs on this laptop:

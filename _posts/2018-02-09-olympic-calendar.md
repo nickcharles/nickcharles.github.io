@@ -3,9 +3,6 @@ layout: post
 title: Creating a Google Calendar for the 2018 Winter Olympics
 ---
 
-Creating a Google Calendar for the 2018 Winter Olympics
--------------------------------------------------------
-
 I was unable to find a nice way to visualize all of the scheduling information for the winter olympics so I decided to throw it all into a Google Calendar. There are a ton of events that would take a long time to manually enter so I set out to do this programatically. There are some things left out here but the gist is correct.
 
 The lesson here is that the fastest way to do things is certainly not always the best way.
