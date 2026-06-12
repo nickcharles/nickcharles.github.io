@@ -19,13 +19,13 @@ Geotemporal data systems, animated map tiles, full Palantir stacks running on ru
 
 ## Projects
 
+**[easy-release](https://github.com/nickcharles/easy-release)**
+
+Simple changelog and release management infrastructure for GitHub projects.
+
 **[react-native-invertible-flatlist](https://github.com/nickcharles/react-native-invertible-flatlist)**
 
-An invertible FlatList for React Native.
-
-**[Spool](https://github.com/nickcharles/Spool)**
-
-Spool is a modular string formatting and manipulation library for C++, built to match the more robust string features provided by languages like Java and Python.
+An invertible FlatList for React Native which renders lists bottom-up.
 
 ## Blog
 
