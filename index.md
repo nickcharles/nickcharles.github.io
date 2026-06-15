@@ -13,7 +13,7 @@ This website is small; make yours small too.
 
 [Better property valuation to enable land value taxes.](https://www.valuebase.ai/)
 
-**Palantir, <small>Software Engineer<br>Palo Alto, CA</small>**
+**Palantir, <small>Software Engineer</small>**
 
 Geotemporal data systems, animated map tiles, full Palantir stacks running on ruggedized Windows laptops, and accelerated software delivery on air-gapped networks. Seven years of fun on the defense side of the business.
 
