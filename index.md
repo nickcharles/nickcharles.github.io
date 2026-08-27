@@ -3,8 +3,6 @@ layout: default
 title: index
 ---
 
-Talk to me about land value taxes, skiing, Dark Souls or black metal.
-
 This website is small; make yours small too.
 
 ## Work
