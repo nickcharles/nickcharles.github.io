@@ -1,0 +1,431 @@
+---
+layout: default
+title: Essay Printer
+permalink: /pdf/
+---
+
+<style>
+  body {
+    max-width: 1200px;
+  }
+
+  .printer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .printer-editor label {
+    display: block;
+    font-weight: bold;
+  }
+
+  .printer-editor input,
+  .printer-editor textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 6px;
+  }
+
+  .printer-editor textarea {
+    min-height: 28em;
+    resize: vertical;
+  }
+
+  .printer-editor button {
+    padding: 6px 10px;
+  }
+
+  .printer-preview {
+    border-left: 1px solid #ccc;
+    padding-left: 30px;
+  }
+
+  .print-header {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 1em;
+    padding-bottom: .75em;
+  }
+
+  .print-header:empty {
+    display: none;
+  }
+
+  .print-header h1 {
+    margin: 0;
+  }
+
+  .print-subtitle {
+    font-size: 1.1em;
+    margin: .25em 0 0;
+  }
+
+  .print-metadata {
+    font-family: sans-serif;
+    font-size: .8em;
+    margin: .5em 0 0;
+  }
+
+  .print-metadata span + span::before {
+    content: " · ";
+  }
+
+  .print-body h1,
+  .print-body h2,
+  .print-body h3,
+  .print-body h4 {
+    break-after: avoid;
+  }
+
+  .print-body p,
+  .print-body li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .print-body blockquote {
+    border-left: 3px solid #aaa;
+    margin-left: 0;
+    padding-left: 1em;
+  }
+
+  .print-body pre {
+    white-space: pre-wrap;
+  }
+
+  @media (max-width: 850px) {
+    .printer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .printer-preview {
+      border-left: 0;
+      border-top: 1px solid #ccc;
+      padding-left: 0;
+      padding-top: 20px;
+    }
+  }
+
+  @page {
+    margin: .6in;
+  }
+
+  @media print {
+    body {
+      margin: 0;
+      max-width: none;
+      padding: 0;
+      font-size: 10pt;
+      line-height: 1.35;
+    }
+
+    body > header,
+    .screen-only,
+    .printer-editor {
+      display: none !important;
+    }
+
+    .printer-grid {
+      display: block;
+    }
+
+    .printer-preview {
+      border: 0;
+      padding: 0;
+    }
+
+    .preview-empty {
+      display: none;
+    }
+
+    .print-body a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+</style>
+
+<div class="printer-grid">
+  <section class="printer-editor">
+    <form id="essay-printer-form">
+      <p>
+        <label for="author">Author</label>
+        <input id="author" name="author" autocomplete="off">
+      </p>
+
+      <p>
+        <label for="published">Published</label>
+        <input id="published" name="published" autocomplete="off">
+      </p>
+
+      <p>
+        <label for="source">Source</label>
+        <input id="source" name="source" autocomplete="off">
+      </p>
+
+      <p>
+        <label for="title">Title</label>
+        <input id="title" name="title" autocomplete="off">
+      </p>
+
+      <p>
+        <label for="subtitle">Subtitle</label>
+        <input id="subtitle" name="subtitle" autocomplete="off">
+      </p>
+
+      <p>
+        <label for="markdown">Markdown</label>
+        <textarea id="markdown" name="markdown" spellcheck="true"></textarea>
+      </p>
+
+      <p>
+        <button type="button" id="print-button">Print / Save PDF</button>
+      </p>
+    </form>
+
+    <details>
+      <summary>Extraction prompt</summary>
+      <p>Copy this prompt alongside the source page HTML, then paste the returned values into the fields above.</p>
+      <button type="button" id="copy-prompt-button">Copy extraction prompt</button>
+    </details>
+  </section>
+
+  <section class="printer-preview">
+    <article id="print-document">
+      <header class="print-header" id="print-header"></header>
+      <div class="print-body" id="print-body">
+        <p class="preview-empty"><em>The rendered article will appear here.</em></p>
+      </div>
+    </article>
+  </section>
+</div>
+
+<script>
+  (() => {
+    "use strict";
+
+    const EXTRACTION_PROMPT = `You are preparing a source-faithful article for compact printing. The complete HTML of the source page appears after this instruction.
+
+Extract the actual essay and its metadata. Return exactly the following labeled sections, with no introductory or closing commentary:
+
+TITLE
+[title, or leave blank]
+
+SUBTITLE
+[subtitle or deck, or leave blank]
+
+AUTHOR
+[author, or leave blank]
+
+PUBLISHED
+[displayed publication date, or leave blank]
+
+SOURCE
+[publication name and a readable source URL, or leave blank]
+
+MARKDOWN
+[complete article as clean Markdown]
+
+Rules:
+- Preserve the complete article text and its original order. Do not summarize, rewrite, fact-check, or add analysis.
+- Remove site navigation, cookie notices, share controls, newsletter promotions, related stories, comments, ads, and other page furniture.
+- Omit decorative images and captions. Omit pull quotes when they duplicate article text. Preserve an image description only when it carries information necessary to understand the essay.
+- Preserve meaningful section headings, paragraphs, lists, links, emphasis, and genuine block quotes as clean Markdown.
+- Put metadata only in its matching labeled section. Begin the Markdown section with the article body exactly as it should be pasted into a Markdown field.
+- In Source, include the publication/site name and canonical article URL when they are available. This will be printed as plain text, not used as a hyperlink.
+- Preserve the displayed publication date faithfully. Do not invent missing metadata; leave its section blank instead.
+- Do not wrap the entire Markdown section in a code fence; it should be ready to copy directly into the app.
+- Before returning, verify that no paragraph from the main essay was accidentally dropped.
+
+SOURCE PAGE HTML:
+`;
+
+    const form = document.getElementById("essay-printer-form");
+    const printHeader = document.getElementById("print-header");
+    const printBody = document.getElementById("print-body");
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function safeUrl(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      try {
+        const parsed = new URL(raw, window.location.href);
+        return ["http:", "https:", "mailto:"].includes(parsed.protocol) ? parsed.href : "";
+      } catch (_) {
+        return "";
+      }
+    }
+
+    function inlineMarkdown(value) {
+      const tokens = [];
+      let text = String(value);
+
+      text = text.replace(/`([^`]+)`/g, (_, code) => {
+        const token = `\u0000${tokens.length}\u0000`;
+        tokens.push(`<code>${escapeHtml(code)}</code>`);
+        return token;
+      });
+
+      text = escapeHtml(text);
+      text = text.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt) => escapeHtml(alt));
+      text = text.replace(/\[([^\]]+)\]\(([^()\s]+(?:\([^()\s]*\)[^()\s]*)?)(?:\s+&quot;[^&]*&quot;)?\)/g, (_, label, url) => {
+        const href = safeUrl(url.replaceAll("&amp;", "&"));
+        if (!href) return label;
+        const token = `\u0000${tokens.length}\u0000`;
+        tokens.push(`<a href="${escapeHtml(href)}">${label}</a>`);
+        return token;
+      });
+      text = text
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+        .replace(/__([^_]+)__/g, "<strong>$1</strong>")
+        .replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g, "$1<em>$2</em>")
+        .replace(/(^|[^_])_([^_\n]+)_(?!_)/g, "$1<em>$2</em>");
+
+      return text.replace(/\u0000(\d+)\u0000/g, (_, index) => tokens[Number(index)]);
+    }
+
+    function renderMarkdown(markdown) {
+      const lines = String(markdown || "").replace(/\r\n?/g, "\n").split("\n");
+      const output = [];
+      let paragraph = [];
+      let listType = "";
+      let codeFence = false;
+      let codeLines = [];
+
+      const closeParagraph = () => {
+        if (!paragraph.length) return;
+        output.push(`<p>${inlineMarkdown(paragraph.join(" ").trim())}</p>`);
+        paragraph = [];
+      };
+
+      const closeList = () => {
+        if (!listType) return;
+        output.push(`</${listType}>`);
+        listType = "";
+      };
+
+      for (let index = 0; index < lines.length; index += 1) {
+        const line = lines[index];
+        const trimmed = line.trim();
+
+        if (/^```/.test(trimmed)) {
+          closeParagraph();
+          closeList();
+          if (codeFence) {
+            output.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+            codeLines = [];
+          }
+          codeFence = !codeFence;
+          continue;
+        }
+
+        if (codeFence) {
+          codeLines.push(line);
+          continue;
+        }
+
+        if (!trimmed) {
+          closeParagraph();
+          closeList();
+          continue;
+        }
+
+        const quoteMatch = line.match(/^\s*>\s?(.*)$/);
+        if (quoteMatch) {
+          closeParagraph();
+          closeList();
+          const quoteLines = [quoteMatch[1]];
+          while (index + 1 < lines.length) {
+            const next = lines[index + 1].match(/^\s*>\s?(.*)$/);
+            if (!next) break;
+            quoteLines.push(next[1]);
+            index += 1;
+          }
+          output.push(`<blockquote>${renderMarkdown(quoteLines.join("\n"))}</blockquote>`);
+          continue;
+        }
+
+        const heading = line.match(/^\s*(#{1,4})\s+(.+?)\s*#*\s*$/);
+        if (heading) {
+          closeParagraph();
+          closeList();
+          const level = heading[1].length;
+          output.push(`<h${level}>${inlineMarkdown(heading[2])}</h${level}>`);
+          continue;
+        }
+
+        if (/^\s*((\*\s*){3,}|(-\s*){3,}|(_\s*){3,})$/.test(line)) {
+          closeParagraph();
+          closeList();
+          output.push("<hr>");
+          continue;
+        }
+
+        const unordered = line.match(/^\s*[-+*]\s+(.+)$/);
+        const ordered = line.match(/^\s*\d+[.)]\s+(.+)$/);
+        if (unordered || ordered) {
+          closeParagraph();
+          const requestedType = unordered ? "ul" : "ol";
+          if (listType && listType !== requestedType) closeList();
+          if (!listType) {
+            listType = requestedType;
+            output.push(`<${listType}>`);
+          }
+          output.push(`<li>${inlineMarkdown((unordered || ordered)[1])}</li>`);
+          continue;
+        }
+
+        closeList();
+        paragraph.push(trimmed);
+      }
+
+      closeParagraph();
+      closeList();
+      if (codeFence && codeLines.length) {
+        output.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+      }
+      return output.join("\n");
+    }
+
+    function updatePreview() {
+      const state = Object.fromEntries(new FormData(form).entries());
+      const header = [];
+      if (state.title) header.push(`<h1>${escapeHtml(state.title)}</h1>`);
+      if (state.subtitle) header.push(`<p class="print-subtitle">${escapeHtml(state.subtitle)}</p>`);
+
+      const metadata = [];
+      if (state.author) metadata.push(`<span>By ${escapeHtml(state.author)}</span>`);
+      if (state.published) metadata.push(`<span>${escapeHtml(state.published)}</span>`);
+      if (state.source) metadata.push(`<span>Source: ${escapeHtml(state.source)}</span>`);
+      if (metadata.length) header.push(`<p class="print-metadata">${metadata.join("")}</p>`);
+
+      printHeader.innerHTML = header.join("");
+      printBody.innerHTML = renderMarkdown(state.markdown) || '<p class="preview-empty"><em>The rendered article will appear here.</em></p>';
+    }
+
+    form.addEventListener("input", updatePreview);
+    document.getElementById("print-button").addEventListener("click", () => window.print());
+
+    document.getElementById("copy-prompt-button").addEventListener("click", async (event) => {
+      const button = event.currentTarget;
+      const originalLabel = button.textContent;
+      try {
+        await navigator.clipboard.writeText(EXTRACTION_PROMPT);
+        button.textContent = "Prompt copied";
+      } catch (_) {
+        window.prompt("Copy this extraction prompt:", EXTRACTION_PROMPT);
+      }
+      window.setTimeout(() => { button.textContent = originalLabel; }, 1500);
+    });
+
+    updatePreview();
+  })();
+</script>
